@@ -40,6 +40,10 @@ gem "jquery-rails"
 
 gem "bcrypt"
 
+gem "actiontext", github: 'kobaltz/actiontext', branch: 'archive', require: 'action_text'
+
+gem "image_processing"
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :articles
   get 'sessions/new'
   get 'advisors/new'
   get 'articles/index'
