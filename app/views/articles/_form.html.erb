@@ -20,6 +20,11 @@
     <%= form.label :content %>
     <%= form.rich_text_area :content %>
   </div>
+  
+    <div class="field">
+    <%= form.label :tag_list %>
+    <%= form.text_field :tag_list, value: @article.tag_list.join(',') %>
+  </div>
 
 
   <div class="actions">
