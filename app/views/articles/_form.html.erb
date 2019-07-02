@@ -21,12 +21,11 @@
     <%= form.rich_text_area :content %>
   </div>
   
-    <div class="field">
-    <%= form.label :tag_list %>
-    <%= form.text_field :tag_list, value: @article.tag_list.join(',') %>
+  <div class="field">
+    <%= form.label :category %>
+    <%= form.collection_select :category, Category.all, :id, :name, :prompt => true %>
   </div>
-
-
+  
   <div class="actions">
     <%= form.submit %>
   </div>

@@ -15,5 +15,4 @@
 //= require rails-ujs
 //= require bootstrap
 //= require activestorage
-//= require bootstrap-tagsinput.min
 //= require_tree .
