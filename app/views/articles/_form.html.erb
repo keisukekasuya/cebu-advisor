@@ -23,7 +23,7 @@
   
   <div class="field">
     <%= form.label :category %>
-    <%= form.collection_select :category, Category.all, :id, :name, :prompt => true %>
+    <%= form.collection_select :category_id, Category.all, :id, :name, :prompt => true %>
   </div>
   
   <div class="actions">
