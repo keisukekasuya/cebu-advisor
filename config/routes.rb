@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
   get 'sessions/new'
-  get 'advisors/new'
+  get '/signup', to: "advisors#new"
   get 'articles/index'
   get 'infos/index'
-  get '/' =>"pages#index"
+  root "pages#index"
   
   resources :advisors
   resources :articles

@@ -1,0 +1,23 @@
+<div class="main advisors-edit">
+  <div class="container">
+    <div class="form-heading">アカウント編集</div>
+    <div class="form advisors-form">
+      <div class="form-body">
+        <% @advisor.errors.full_messages.each do |message| %>
+          <div class="form-error">
+            <%= message %>
+          </div>
+        <% end %>
+      
+        <%= form_tag("/advisors/#{@advisor.id}/update", {multipart: true}) do %>
+          <p>advisor名</p>
+          <p>画像</p>
+          <input name="image" type="file">
+          <p>メールアドレス</p>
+          <input name="email" value="<%= @advisor.email %>">
+          <input type="submit" value="保存">
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

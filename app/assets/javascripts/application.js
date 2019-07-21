@@ -15,4 +15,5 @@
 //= require jquery
 //= require bootstrap
 //= require activestorage
+//= require jquery_ujs
 //= require_tree .

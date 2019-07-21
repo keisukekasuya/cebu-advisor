@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
 
   add_flash_types :success, :info, :warning, :danger
   
-  helper_method :current_user, :logged_in?
+  helper_method :current_advisor, :logged_in?
   
   def current_advisor
     @current_advisor ||= Advisor.find_by(id: session[:advisor_id])
