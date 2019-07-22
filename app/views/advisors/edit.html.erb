@@ -10,7 +10,8 @@
         <% end %>
       
         <%= form_tag("/advisors/#{@advisor.id}/update", {multipart: true}) do %>
-          <p>advisor名</p>
+          <p>アドバイザー名</p>
+          <input name="name" value="<%= @advisor.name %>">
           <p>画像</p>
           <input name="image" type="file">
           <p>メールアドレス</p>

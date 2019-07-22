@@ -17,7 +17,7 @@
         <%= stylesheet_link_tag    'application', media: 'all' %>
         <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
         <%= javascript_pack_tag 'application' %>
-    
+        <%= csrf_meta_tag %>
     </head>
      
   <body>
@@ -34,39 +34,40 @@
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav">
                 <li class="nav-item ">
-                    <%= link_to "cebu-info", infos_index_path, class:"nav-link" %>
+                    <%= link_to "現地情報", infos_index_path, class:"nav-link" %>
                 </li>
                 <li class="nav-item dropdown">
-                  <%= link_to "travel-articles", articles_index_path, class:"nav-link dropdown-toggle", role:"botton", id:"navbarDropdownMenuLink", "data-toggle":"dropdown", "aria-haspopup":"true", "aria-expanded":"false" %>
+                  <%= link_to "旅行記", articles_index_path, class:"nav-link dropdown-toggle", role:"botton", id:"navbarDropdownMenuLink", "data-toggle":"dropdown", "aria-haspopup":"true", "aria-expanded":"false" %>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="https://55978056359449edacfbc74fb01bc74f.vfs.cloud9.us-east-2.amazonaws.com/articles">all</a>
-                        <a class="dropdown-item" href="#">hotel</a>
-                        <a class="dropdown-item" href="#">beach</a>
-                        <a class="dropdown-item" href="#">restaurant</a>
-                        <a class="dropdown-item" href="#">massage</a>
-                        <a class="dropdown-item" href="#">enjoyspots</a>
-                        <a class="dropdown-item" href="#">casino</a>
-                        <a class="dropdown-item" href="#">nightspots</a>
-                        <a class="dropdown-item" href="#">moneychange</a>
-                        <a class="dropdown-item" href="#">others</a>
+                        <a class="dropdown-item" href="https://55978056359449edacfbc74fb01bc74f.vfs.cloud9.us-east-2.amazonaws.com/articles">全記事</a>
+                        <% @categories.each do |category| %>
+                        <a class="dropdown-item" href="#"><%= category.name %></a>
+                        <% end %>
                     </div>
                 </li>
                 <% unless logged_in? %>
                 <li class="nav-item">
-                    <%= link_to "login", login_path, class:"nav-link" %>
+                    <%= link_to "ログイン", login_path, class:"nav-link" %>
                 </li>
                 <li class="nav-item">
-                    <%= link_to "new-advisor", signup_path, class:"nav-link" %>
-                </li>
-                <% else %>
-                <li class="nav-item">
-                    <%= link_to "logout", logout_path, class:"nav-link" %>
+                    <%= link_to "アドバイザー登録", signup_path, class:"nav-link" %>
                 </li>
                 <form class="form-inline my-2 my-lg-0">
                   <input type="search" class="form-control mr-sm-2" placeholder="keyword..." aria-label="検索...">
                   <button type="submit" class="btn btn-outline-success my-2 my-sm-0">search</button>
                 </form>
-                <li>
+                <% else %>
+                <li class="nav-item">
+                    <%= link_to "旅行記投稿", new_article_path, class:"nav-link" %>
+                </li>
+                <li class="nav-item">
+                    <%= link_to "ログアウト", logout_path, method: "delete", class:"nav-link" %>
+                </li>
+                <form class="form-inline my-2 my-lg-0">
+                  <input type="search" class="form-control mr-sm-2" placeholder="keyword..." aria-label="検索...">
+                  <button type="submit" class="btn btn-outline-success my-2 my-sm-0">search</button>
+                </form>
+                 <li class="text-right">
                     <%= link_to(current_advisor.name, "/advisors/#{current_advisor.id}") %>
                 </li>
                 <% end %>
