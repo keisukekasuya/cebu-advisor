@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user,only: [:new]
   protect_from_forgery
 
   # GET /articles
@@ -12,12 +13,16 @@ class ArticlesController < ApplicationController
   # GET /articles/1.json
   def show
     @article = Article.find_by(id: params[:id])
-    @advisor = Advisor.find_by(id: @article.advisor_id)
+    @advisor = @article.user
   end
 
   # GET /articles/new
   def new
     @article = Article.new
+    if current_advisor == nil
+      flash[:notice] = "ログインが必要です"
+      redirect_to("/login")
+    end
   end
 
   # GET /articles/1/edit
@@ -74,4 +79,5 @@ class ArticlesController < ApplicationController
     def article_params
       params.require(:article).permit(:title, :content, :category_id)
     end
+    
 end

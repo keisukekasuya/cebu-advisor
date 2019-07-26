@@ -1,5 +1,4 @@
 class Advisor < ApplicationRecord
-  mount_uploader :image_name, ImageUploader
   
   validates :name, presence: true, length: { maximum: 15 }
   validates :email, presence: true, uniqueness: true, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }

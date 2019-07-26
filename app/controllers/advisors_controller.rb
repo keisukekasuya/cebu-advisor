@@ -1,4 +1,7 @@
 class AdvisorsController < ApplicationController
+   before_action :authenticate_user,{only: [:edit, :update]}
+   before_action :forbid_login_user,{only: [:new, :create]}
+   before_action :ensure_correct_user,{only: [:edit, :update]}
   def new
     @advisor = Advisor.new
   end
@@ -26,16 +29,17 @@ class AdvisorsController < ApplicationController
     @advisor = User.find_by(id: params[:id])
     @advisor.name = params[:name]
     @advisor.email = params[:email]
-
-    if params[:image]
-      @advisor.image_name = "#{@advisor.id}.jpg"
-      image = params[:image]
-      File.binwrite("public/assets/#{@user.image_name}", image.read)
-    end
   end
   
+  def ensure_correct_user
+    if @current_advisor.id != params[:id].to_i
+      flash[:notice] = "権限がありません"
+      redirect_to("/articles/index")
+    end
+  end
+
   private
   def advisor_params
-    params.require(:advisor).permit(:name, :email, :password, :password_confirmation,:image_name)
+    params.require(:advisor).permit(:name, :email, :password, :password_confirmation)
   end
 end

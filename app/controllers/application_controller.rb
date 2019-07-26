@@ -18,4 +18,18 @@ class ApplicationController < ActionController::Base
   def logged_in?
     !current_advisor.nil?
   end
+  
+  def authenticate_user
+    if current_advisor == nil
+      flash[:notice] = "ログインが必要です"
+      redirect_to("/login")
+    end
+  end
+  
+  def forbid_login_user
+    if @current_advisor
+      flash[:notice] = "既にログインしています"
+      redirect_to("/articles/index")
+    end
+  end
 end
