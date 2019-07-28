@@ -4,12 +4,14 @@
     <h2 class>旅行情報サイトやガイドブックより満足できるセブマニアによるセブ旅行者のためのニッチな情報サイト！</h2>
   
     <div class="row">
-      <div class="col-md-offset-3 col-md-3">
-        <%= link_to 'advisor 新規登録', signup_path, class: 'btn btn-block btn-white' %>
-      </div>
-      <div class="col-md-3">
-        <%= link_to 'advisor ログイン', login_path, class: 'btn btn-block btn-white' %>
-      </div>
+      <% if @advisor == current_advisor %>
+        <div class="col-md-offset-3 col-md-3">
+          <%= link_to 'advisor 新規登録', signup_path, class: 'btn btn-block btn-white' %>
+        </div>
+        <div class="col-md-3">
+          <%= link_to 'advisor ログイン', login_path, class: 'btn btn-block btn-white' %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

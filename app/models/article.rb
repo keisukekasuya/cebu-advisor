@@ -6,7 +6,7 @@ class Article < ApplicationRecord
     validates :title
     validates :content
     validates :category
-    validates :advisor_id, presence :true
+    validates :advisor_id
   end
   
   def advisor

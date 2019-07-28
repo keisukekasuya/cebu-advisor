@@ -41,7 +41,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         <a class="dropdown-item" href="https://55978056359449edacfbc74fb01bc74f.vfs.cloud9.us-east-2.amazonaws.com/articles">全記事</a>
                         <% @categories.each do |category| %>
-                        <a class="dropdown-item" href="#"><%= category.name %></a>
+                            <%= link_to category.name, articles_path(category_id: category.id), class:"dropdown-item" %>
                         <% end %>
                     </div>
                 </li>

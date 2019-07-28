@@ -3,7 +3,7 @@
     <div class="advisor">
       <h2><%= @advisor.name %></h2>
       <p><%= @advisor.email %></p>
-      <% if @advisor.id %>
+      <% if @advisor.id == current_advisor.id %>
         <%= link_to("編集", "/advisors/#{@advisor.id}/edit") %>
       <% end %>
     </div>

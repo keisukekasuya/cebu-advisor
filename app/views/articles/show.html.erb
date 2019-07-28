@@ -18,10 +18,15 @@
 </p>
 
 <div class="article-advisor-name">
-  <img src="<%= "/assets/#{@advisor.image_name}" %>">
   <%= link_to(@advisor.name,"/advisors/#{@advisor.id}") %>
 </div>
 
-<%= link_to 'Edit', edit_article_path(@article) %> |
-<%= link_to 'Back', articles_path %>
+  <%= link_to 'Back', articles_path %>
+  <% unless current_advisor == nil %>
+    <% if @article.advisor_id == current_advisor.id %>
+      <%= link_to 'Edit', edit_article_path(@article) %>
+      <%= link_to 'Destroy', @article, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
+  <% end %>
+  
 </div>

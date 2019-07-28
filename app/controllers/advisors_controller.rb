@@ -2,6 +2,7 @@ class AdvisorsController < ApplicationController
    before_action :authenticate_user,{only: [:edit, :update]}
    before_action :forbid_login_user,{only: [:new, :create]}
    before_action :ensure_correct_user,{only: [:edit, :update]}
+   
   def new
     @advisor = Advisor.new
   end

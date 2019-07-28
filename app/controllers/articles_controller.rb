@@ -1,19 +1,24 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user,only: [:new]
+  before_action :authenticate_user,only: [:new, :edit, :update, :destroy]
+  before_action :ensure_correct_user, only: [:edit, :update, :destroy]
   protect_from_forgery
 
   # GET /articles
   # GET /articles.json
   def index
-    @articles = Article.all.order(created_at: :desc)
+    if params[:category_id].present?
+      @articles = Article.where(category_id: params[:category_id])
+    else
+      @articles = Article.all.order(created_at: :desc)
+    end
   end
 
   # GET /articles/1
   # GET /articles/1.json
   def show
     @article = Article.find_by(id: params[:id])
-    @advisor = @article.user
+    @advisor = @article.advisor
   end
 
   # GET /articles/new
@@ -33,7 +38,7 @@ class ArticlesController < ApplicationController
   # POST /articles.json
   def create
     @article = Article.new(article_params)
-    @article.advisor_id = @current_advisor.id
+    @article.advisor_id = current_advisor.id
     respond_to do |format|
       if @article.save
         format.html { redirect_to @article, notice: 'Article was successfully created.' }
@@ -68,6 +73,15 @@ class ArticlesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def ensure_correct_user
+    @article = Article.find_by(id: params[:id])
+    if @article.advisor_id != params[:id].to_i
+      flash[:notice] = "権限がありません"
+      redirect_to("/articles/index")
+    end
+  end  
+  
 
   private
     # Use callbacks to share common setup or constraints between actions.
